@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../components/button";
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<"home" | "login" | "register">(
@@ -28,20 +29,14 @@ const App: React.FC = () => {
             placeholder="••••••••"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
-        >
+        <Button className="w-full" onClick={(e) => e.preventDefault()}>
           Sign In
-        </button>
+        </Button>
       </form>
       <div className="mt-4 text-center">
-        <button
-          onClick={() => setCurrentView("register")}
-          className="text-blue-400 hover:text-blue-300 underline"
-        >
+        <Button variant="link" onClick={() => setCurrentView("register")}>
           Don't have an account? Sign up
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -85,20 +80,14 @@ const App: React.FC = () => {
             placeholder="••••••••"
           />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300"
-        >
+        <Button className="w-full" onClick={(e) => e.preventDefault()}>
           Sign Up
-        </button>
+        </Button>
       </form>
       <div className="mt-4 text-center">
-        <button
-          onClick={() => setCurrentView("login")}
-          className="text-blue-400 hover:text-blue-300 underline"
-        >
+        <Button variant="link" onClick={() => setCurrentView("login")}>
           Already have an account? Sign in
-        </button>
+        </Button>
       </div>
     </div>
   );
@@ -115,18 +104,12 @@ const App: React.FC = () => {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-        <button
-          onClick={() => setCurrentView("login")}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
-        >
+        <Button onClick={() => setCurrentView("login")}>
           Sign In
-        </button>
-        <button
-          onClick={() => setCurrentView("register")}
-          className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
-        >
+        </Button>
+        <Button variant="secondary" onClick={() => setCurrentView("register")}>
           Create Account
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">

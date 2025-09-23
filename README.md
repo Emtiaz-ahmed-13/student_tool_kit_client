@@ -1,69 +1,49 @@
-# React + TypeScript + Vite
+# Student Life Toolkit (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Production-ready Next.js 15 + TypeScript app (App Router) for the Student Life Toolkit. Connects to an Express + Prisma backend via server-side proxy routes.
 
-Currently, two official plugins are available:
+## Prerequisites
+- Node 20+
+- Backend running at `http://localhost:5000/api/v1`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Setup
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Install dependencies:
+```bash
+pnpm install # or npm install / yarn
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Create `.env.local`:
+```bash
+NEXT_PUBLIC_APP_NAME="Student Life Toolkit"
+BACKEND_API_BASE="http://localhost:5000/api/v1"
+NODE_ENV="development"
 ```
+
+3. Run in development:
+```bash
+pnpm dev
+```
+
+## Tech
+- Next.js 15 App Router, Server Components by default
+- Tailwind CSS + theme (dark mode)
+- TanStack Query for client fetching, React Hook Form + Zod for forms
+- Recharts for charts
+- ESLint + Prettier
+- Vitest + Testing Library
+
+## Auth Flow
+- Login via `/api/auth/login` which forwards to backend `/auth/login`. On success sets `st_auth` httpOnly cookie.
+- Logout via `/api/auth/logout` clears cookie.
+- Middleware protects protected routes and redirects unauthenticated users to `/login`.
+- Server data fetching attaches `Authorization: Bearer <token>` using cookie.
+
+## Testing
+```bash
+pnpm test
+```
+
+## Notes
+- Client code should call only `/api/*` routes.
+- Adjust UI and add more pages following the established patterns.

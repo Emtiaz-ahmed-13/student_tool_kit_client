@@ -1,3 +1,16 @@
+// @ts-check
+import nextPlugin from 'eslint-config-next';
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  ...nextPlugin,
+  {
+    rules: {
+      'react/jsx-key': 'off',
+    },
+  },
+];
+
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'

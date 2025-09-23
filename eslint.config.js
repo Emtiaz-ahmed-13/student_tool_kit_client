@@ -1,3 +1,18 @@
+// @ts-check
+import eslint from '@eslint/js'
+import next from 'eslint-config-next'
+
+export default [
+  eslint.configs.recommended,
+  ...next(),
+  {
+    rules: {
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'react/jsx-key': 'off'
+    }
+  }
+]
+
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
